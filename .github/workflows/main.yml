@@ -15,7 +15,6 @@ jobs:
           go-version: 1.16
       - name: check setup
         run: |     
-          go mod init github.com/felipeksw/tech-challenge-fiap-lambda
           go mod tidy
       - name: Build
         working-directory: /
