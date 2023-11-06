@@ -19,7 +19,7 @@ jobs:
       - name: Build
         working-directory: /
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main /cmd/cognito-callback/main.go && zip deployment.zip main
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=off go build -v -a -o main /cmd/cognito-callback/main.go && zip deployment.zip main
       - name: Zip
         working-directory: /
         run: zip -j cognito-callback.zip cognito-callback
