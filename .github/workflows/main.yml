@@ -18,7 +18,8 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Build
         working-directory: /
-        run: go build -v /cmd/cognito-callback/
+        run: |
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main /cmd/cognito-callback/main.go && zip deployment.zip main
       - name: Zip
         working-directory: /
         run: zip -j cognito-callback.zip cognito-callback
