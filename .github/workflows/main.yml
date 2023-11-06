@@ -17,11 +17,11 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Build
-        working-directory: /
+        working-directory: ./
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=off go build -v -a -o main /cmd/cognito-callback/main.go && zip deployment.zip main
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=off go build -v -a -o main ./cmd/cognito-callback/main.go && zip deployment.zip main
       - name: Zip
-        working-directory: /
+        working-directory: ./
         run: zip -j cognito-callback.zip cognito-callback
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -30,5 +30,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
       - name: Upload Zip
-        working-directory: /
+        working-directory: ./
         run: aws lambda update-function-code --function-name tech-challenge-app-cognito-callback --zip-file fileb://cognito-callback.zip
