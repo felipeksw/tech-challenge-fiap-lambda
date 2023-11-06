@@ -166,7 +166,7 @@ func getSignUpResponse() events.APIGatewayProxyResponse {
 
 	response := events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       "{\"status\":\"ok\", \"message\":\"Please, access the link and proceed with the sign-in. [" + cnf.urlSignIn + "]\"}",
+		Body:       "{\"status\":\"ok\", \"message\":\"Please, access the link and proceed with the sign-in: [" + cnf.urlSignIn + "]\"}",
 	}
 
 	return response
