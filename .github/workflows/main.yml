@@ -16,14 +16,14 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go-version }}
-      - name: check setup
+      - name: Pre Build
         run: |     
           go mod init github.com/felipeksw/tech-challenge-fiap-lambda
           go get -u -v github.com/aws/aws-lambda-go
           env GOOS=linux   
       - name: Build
         working-directory: ./
-        run: go build -v -a -work 'cmd/cognito-callback/main.go'
+        run: go build -v -a -work -o cognito-callback 'cmd/cognito-callback/main.go'
       - name: Zip
         working-directory: ./
         run: zip -j cognito-callback.zip cognito-callback

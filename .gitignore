@@ -1,7 +1,7 @@
-# 
+# go files
 go.mod
 go.sum
 
-# Builded file
+# lambda flies
 cognito-callback
 cognito-callback.zip
