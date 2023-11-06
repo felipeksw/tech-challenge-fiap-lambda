@@ -1,0 +1,7 @@
+# 
+go.mod
+go.sum
+
+# Builded file
+cognito-callback
+cognito-callback.zip
