@@ -41,15 +41,15 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 type cognitoConfig struct {
 	cognitoClientId     string
 	cognitoClientSecret string
-	cognitoDnsPoll      string
-	awsRegion           string
-	apiGatewayPrefix    string
-	apiStage            string
-	apiGatewayPath      string
-	urlSignIn           string
-	urlGetToken         string
-	urlRedirect         string
-	AuthorizationToken  string
+	//cognitoDnsPoll      string
+	awsRegion string
+	//apiGatewayPrefix    string
+	//apiStage            string
+	//apiGatewayPath      string
+	urlSignIn          string
+	urlGetToken        string
+	urlRedirect        string
+	AuthorizationToken string
 }
 
 func getCognitoConfig() cognitoConfig {
@@ -57,20 +57,24 @@ func getCognitoConfig() cognitoConfig {
 	c := new(cognitoConfig)
 	c.cognitoClientId = os.Getenv("CLIENT_ID")
 	c.cognitoClientSecret = os.Getenv("CLIENT_SECRET")
-	c.apiGatewayPrefix = os.Getenv("API_GW_ID")
+	//c.apiGatewayPrefix = os.Getenv("API_GW_ID")
 	c.awsRegion = os.Getenv("AWS_REGION")
-	c.cognitoDnsPoll = "user-auth-grp36"
-	c.apiStage = "default"
-	c.apiGatewayPath = "cognito-callback"
+	//c.cognitoDnsPoll = "user-auth-grp36"
+	//c.apiStage = ""
+	//c.apiGatewayPath = "cognito-callback"
 
-	c.urlRedirect = "https://" + c.apiGatewayPrefix + ".execute-api." + c.awsRegion + ".amazonaws.com/" + c.apiStage + "/" + c.apiGatewayPath
-	c.urlGetToken = "https://" + c.cognitoDnsPoll + ".auth." + c.awsRegion + ".amazoncognito.com/oauth2/token"
+	//c.urlRedirect = "https://" + c.apiGatewayPrefix + ".execute-api." + c.awsRegion + ".amazonaws.com/" + c.apiStage + "/" + c.apiGatewayPath
+	//c.urlGetToken = "https://" + c.cognitoDnsPoll + ".auth." + c.awsRegion + ".amazoncognito.com/oauth2/token"
+	c.urlRedirect = os.Getenv("URL_REDIRECT")
+	c.urlGetToken = os.Getenv("URL_GET_TOKEN")
 
 	params := url.Values{}
 	params.Add("client_id", c.cognitoClientId)
 	params.Add("redirect_uri", c.urlRedirect)
 
-	c.urlSignIn = "https://" + c.cognitoDnsPoll + ".auth." + c.awsRegion + ".amazoncognito.com/oauth2/authorize?response_type=code&scope=email+openid+phone&" + params.Encode()
+	//c.urlSignIn = "https://" + c.cognitoDnsPoll + ".auth." + c.awsRegion + ".amazoncognito.com/oauth2/authorize?response_type=code&scope=email+openid+phone&" + params.Encode()
+
+	c.urlSignIn = os.Getenv("URL_SIGNIN") + "?response_type=code&scope=email+openid+phone&" + params.Encode()
 
 	c.AuthorizationToken = base64.StdEncoding.EncodeToString([]byte(c.cognitoClientId + ":" + c.cognitoClientSecret))
 
