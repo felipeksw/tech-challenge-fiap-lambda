@@ -23,7 +23,7 @@ jobs:
           env GOOS=linux   
       - name: Build
         working-directory: ./
-        run: go build -v -u -work -o cognito-callback 'cmd/cognito-callback/main.go'
+        run: go build -v -work -o cognito-callback 'cmd/cognito-callback/main.go'
       - name: Zip
         working-directory: ./
         run: zip -sv -j cognito-callback.zip cognito-callback
