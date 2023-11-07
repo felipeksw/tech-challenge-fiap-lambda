@@ -59,7 +59,7 @@ func getCognitoConfig() cognitoConfig {
 	c.cognitoClientSecret = os.Getenv("CLIENT_SECRET")
 	c.apiGatewayPrefix = os.Getenv("API_GW_ID")
 	c.awsRegion = os.Getenv("AWS_REGION")
-	c.cognitoDnsPoll = "tech-challenge-grp36"
+	c.cognitoDnsPoll = "user-auth-grp36"
 	c.apiStage = "default"
 	c.apiGatewayPath = "cognito-callback"
 
